@@ -1,12 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"net/http"
+	"image/color"
 	"io/ioutil"
+	"net/http"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"encoding/json"
+	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
 )
 
 func main(){
@@ -32,9 +36,26 @@ func main(){
 		fmt.Println(err)
 	}
 
+	img:= canvas.NewImageFromFile("weather.png")
+	img.FillMode = canvas.ImageFill(100)
+	label1:= canvas.NewText("Weather Details", color.White)
+	label1.TextStyle = fyne.TextStyle{Bold: true}
 
-	
+	label2:= canvas.NewText(fmt.Sprintf("Country %s",weather.Sys.Country),color.White)
 
+	label3:= canvas.NewText(fmt.Sprintf("Wind Speed %.2f",weather.Wind.Speed),color.White)
+
+	label4:= canvas.NewText(fmt.Sprintf("Temp %.2f",weather.Main.Temp),color.White)
+
+	w.SetContent(
+		container.NewVBox(
+			label1,
+			img,
+			label2,
+			label3,
+			label4,
+		),
+	)
 	w.ShowAndRun()
 
 }
