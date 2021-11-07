@@ -37,7 +37,7 @@ func main(){
 	}
 
 	img:= canvas.NewImageFromFile("weather.png")
-	img.FillMode = canvas.ImageFill(100)
+	img.FillMode = canvas.ImageFillOriginal
 	label1:= canvas.NewText("Weather Details", color.White)
 	label1.TextStyle = fyne.TextStyle{Bold: true}
 
